@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 6 Months, My Nepali Queen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #f48fb1 70%, #f06292 100%);
+      font-family: 'Lato', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body.scrollable {
+      overflow-y: auto;
+      justify-content: flex-start;
+      padding-top: 10vh;
+      padding-bottom: 4rem;
+    }
+
+    /* === INTRO BURST === */
+    .intro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #f48fb1 70%, #f06292 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease-out;
+    }
+
+    .intro-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .burst-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      opacity: 0;
+      pointer-events: none;
+      animation: burstOut 2.5s ease-out forwards;
+      font-size: 32px;
+    }
+
+    .burst-item.is-six {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(194, 24, 91, 0.4);
+    }
+
+    @keyframes burstOut {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+      }
+      15% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
+      }
+      30% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(
+          calc(-50% + var(--tx)),
+          calc(-50% + var(--ty))
+        ) scale(var(--end-scale)) rotate(var(--end-rot));
+      }
+    }
+
+    /* Floating hearts background */
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -60px;
+      opacity: 0;
+      animation: floatUp linear infinite;
+      font-size: 24px;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg) scale(0.5);
+      }
+      10% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 0.4;
+      }
+      90% {
+        opacity: 0.1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-110vh) rotate(360deg) scale(1);
+      }
+    }
+
+    /* Main content — hidden until intro ends */
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      max-width: 480px;
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .content.visible {
+      opacity: 1;
+    }
+
+    /* Pulsing heart */
+    .main-heart {
+      font-size: 80px;
+      display: inline-block;
+      animation: pulse 1.5s ease-in-out infinite, fadeSlideIn 1s ease-out both;
+      filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.4));
+      margin-bottom: 1.5rem;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.15); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.1); }
+      60% { transform: scale(1); }
+    }
+
+    /* Fade + slide in animation */
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(194, 24, 91, 0.3);
+      margin-bottom: 0.5rem;
+      animation: fadeSlideIn 1s ease-out 0.3s both;
+    }
+
+    .subheading {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2.5rem;
+      animation: fadeSlideIn 1s ease-out 0.5s both;
+    }
+
+    .closing {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.85);
+      animation: fadeSlideIn 1s ease-out 1.2s both;
+    }
+
+    /* Photo gallery */
+    .gallery {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      padding: 0 2rem;
+      margin-top: 1rem;
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .gallery.visible {
+      opacity: 1;
+    }
+
+    .gallery-label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.85);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .gallery-scroll {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 0 16px;
+      scrollbar-width: none;
+    }
+
+    .gallery-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-scroll img {
+      flex-shrink: 0;
+      width: 300px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 16px;
+      scroll-snap-align: center;
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 20px rgba(194, 24, 91, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-scroll img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Sparkle effect */
+    .sparkle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 0.8; transform: scale(1); }
+    }
+
+    /* Responsive */
+    @media (max-width: 400px) {
+      .heading { font-size: 1.8rem; }
+      .main-heart { font-size: 60px; }
+      .message p { font-size: 1rem; }
+      .content { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Intro burst overlay -->
+  <div class="intro-overlay" id="intro"></div>
+
+  <div class="hearts-container" id="hearts"></div>
+
+  <div class="content" id="content">
+    <div class="main-heart">&#x1F497;</div>
+    <h1 class="heading">Happy 6 Months, My Nepali Queen</h1>
+    <p class="subheading">28 . 02 . 2026</p>
+
+  </div>
+
+  <div class="gallery" id="gallery">
+    <p class="gallery-label">some of my favorite moments together + your handsome man hehe &lt;3</p>
+    <div class="gallery-scroll">
+      <img src="photos/02.jpg" alt="us">
+      <img src="photos/03.jpg" alt="us">
+      <img src="photos/01.jpg" alt="us">
+      <img src="photos/04.jpg" alt="us">
+      <img src="photos/05.jpg" alt="us">
+      <img src="photos/06.jpg" alt="us">
+      <img src="photos/07.jpg" alt="us">
+      <img src="photos/08.jpg" alt="us">
+      <img src="photos/09.jpg" alt="us">
+      <img src="photos/10.jpg" alt="us">
+      <img src="photos/11.jpg" alt="us">
+      <img src="photos/13.jpg" alt="us">
+      <img src="photos/14.jpg" alt="us">
+    </div>
+    <p class="closing" style="margin-top: 1.5rem; text-align: center;">with all my love &hearts;</p>
+  </div>
+
+  <script>
+    const intro = document.getElementById('intro');
+    const content = document.getElementById('content');
+    const gallery = document.getElementById('gallery');
+    const heartsContainer = document.getElementById('hearts');
+    const heartEmojis = ['\u2764\uFE0F', '\uD83D\uDC95', '\uD83D\uDC96', '\uD83D\uDC97', '\uD83E\uDE77', '\uD83D\uDC8C'];
+    const burstItems = ['\u2764\uFE0F', '6', '\uD83D\uDC95', '6', '\uD83D\uDC96', '6', '\uD83D\uDC97', '6', '\uD83E\uDE77', '6',
+                        '\u2764\uFE0F', '\uD83D\uDC96', '6', '\uD83D\uDC95', '6', '\uD83D\uDC97', '\uD83E\uDE77', '6', '\uD83D\uDC8C', '6'];
+
+    // === INTRO BURST ===
+    burstItems.forEach((item, i) => {
+      const el = document.createElement('div');
+      el.classList.add('burst-item');
+      if (item === '6') {
+        el.classList.add('is-six');
+        el.style.fontSize = (28 + Math.random() * 24) + 'px';
+      } else {
+        el.style.fontSize = (24 + Math.random() * 28) + 'px';
+      }
+      el.textContent = item;
+
+      // Random direction and distance from center
+      const angle = (Math.PI * 2 * i / burstItems.length) + (Math.random() - 0.5) * 0.8;
+      const dist = 120 + Math.random() * 200;
+      el.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+      el.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+      el.style.setProperty('--end-scale', (0.6 + Math.random() * 0.8).toFixed(2));
+      el.style.setProperty('--end-rot', (Math.random() * 360 - 180) + 'deg');
+      el.style.animationDelay = (i * 0.06) + 's';
+
+      intro.appendChild(el);
+    });
+
+    // After burst finishes, fade out overlay and show content
+    setTimeout(() => {
+      intro.classList.add('fade-out');
+      document.body.classList.add('scrollable');
+      content.classList.add('visible');
+      gallery.classList.add('visible');
+    }, 2600);
+
+    // Remove overlay from DOM after fade
+    setTimeout(() => {
+      intro.remove();
+    }, 3500);
+
+    // === FLOATING HEARTS (start after intro) ===
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-heart');
+      heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.fontSize = (16 + Math.random() * 20) + 'px';
+      heart.style.animationDuration = (6 + Math.random() * 8) + 's';
+      heart.style.animationDelay = Math.random() * 2 + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 16000);
+    }
+
+    // Start background hearts after intro fades
+    setTimeout(() => {
+      for (let i = 0; i < 8; i++) {
+        setTimeout(createHeart, i * 400);
+      }
+      setInterval(createHeart, 1200);
+    }, 2600);
+
+    // === SPARKLES (start after intro) ===
+    function createSparkle() {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = Math.random() * 100 + '%';
+      sparkle.style.top = Math.random() * 100 + '%';
+      sparkle.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+      sparkle.style.animationDelay = Math.random() * 3 + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 5000);
+    }
+
+    setTimeout(() => {
+      for (let i = 0; i < 15; i++) {
+        setTimeout(createSparkle, i * 300);
+      }
+      setInterval(createSparkle, 800);
+    }, 2600);
+  </script>
+</body>
+</html>
