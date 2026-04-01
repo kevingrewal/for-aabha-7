@@ -327,14 +327,14 @@
     const gallery = document.getElementById('gallery');
     const heartsContainer = document.getElementById('hearts');
     const heartEmojis = ['\u2764\uFE0F', '\uD83D\uDC95', '\uD83D\uDC96', '\uD83D\uDC97', '\uD83E\uDE77', '\uD83D\uDC8C'];
-    const burstItems = ['\u2764\uFE0F', '6', '\uD83D\uDC95', '6', '\uD83D\uDC96', '6', '\uD83D\uDC97', '6', '\uD83E\uDE77', '6',
-                        '\u2764\uFE0F', '\uD83D\uDC96', '6', '\uD83D\uDC95', '6', '\uD83D\uDC97', '\uD83E\uDE77', '6', '\uD83D\uDC8C', '6'];
+    const burstItems = ['\u2764\uFE0F', '7', '\uD83D\uDC95', '7', '\uD83D\uDC96', '7', '\uD83D\uDC97', '7', '\uD83E\uDE77', '7',
+                        '\u2764\uFE0F', '\uD83D\uDC96', '7', '\uD83D\uDC95', '7', '\uD83D\uDC97', '\uD83E\uDE77', '7', '\uD83D\uDC8C', '7'];
 
     // === INTRO BURST ===
     burstItems.forEach((item, i) => {
       const el = document.createElement('div');
       el.classList.add('burst-item');
-      if (item === '6') {
+      if (item === '7') {
         el.classList.add('is-six');
         el.style.fontSize = (28 + Math.random() * 24) + 'px';
       } else {
